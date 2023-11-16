@@ -1,4 +1,4 @@
-const http= require('http')
+const express= require('express')
 
 let notes = [
     {
@@ -34,16 +34,16 @@ let notes = [
     
 ]
 
-const server = http.createServer((request,response)=> {
-    response.statusCode=200
-    response.setHeader=('Content-Type','application/json')
-    response.end(JSON.stringify(notes))
+const app = express()
+
+app.get('/', (req,res)=> {
+    res.send('hello postman')
 })
 
-const host= '127.0.0.1'
-const port = 3000
+const HOST= '127.0.0.1'
+const PORT = 3000
 
 
-server.listen(port,host,()=> {
-    console.log(`the server is running at http://${host}:${port}`)
+app.listen(PORT,HOST,()=> {
+    console.log(`the server is running at http://${HOST}:${PORT}`)
 })
