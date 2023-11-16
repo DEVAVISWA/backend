@@ -37,7 +37,7 @@ let notes = [
 const app = express()
 
 app.get('/', (req,res)=> { 
-    res.send('<h1>notes application</h1>')
+    res.send('<h1>Notes application</h1>')
 })
 
 app.get('/api/notes',(req,res)=>{
