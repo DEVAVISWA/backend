@@ -36,8 +36,12 @@ let notes = [
 
 const app = express()
 
-app.get('/', (req,res)=> {
-    res.send('hello postman')
+app.get('/', (req,res)=> { 
+    res.send('<h1>notes application</h1>')
+})
+
+app.get('/api/notes',(req,res)=>{
+    res.json(notes)
 })
 
 const HOST= '127.0.0.1'
