@@ -15,7 +15,23 @@ let notes = [
         id:3,
         content: 'ijkl',
         important: true
+    },
+    {
+        id:4,
+        content: 'mnop',
+        important: true
+    },
+    {
+        id:5,
+        content: 'qrst',
+        important: false
+    },
+    {
+        id:6,
+        content: 'uvwx',
+        important: true
     }
+    
 ]
 
 const server = http.createServer((request,response)=> {
