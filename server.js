@@ -86,16 +86,34 @@ app.put('/api/notes/:id', (req, res) => {
     //find the id from params
     const id = req.params.id
     //get the note to be replaced from the user request
-    const noteToReplace= req.body
+    const noteToReplace = req.body
     //find the obj matching the id
-    const note = notes.find(note=> note.id==id)
+    const note = notes.find(note => note.id == id)
 
-    notes= notes.map(note=> note.id==id ? noteToReplace : note)
+    notes = notes.map(note => note.id == id ? noteToReplace : note)
 
     if (note) {
-        res.status(200).json({message : "the note is replaced successfully"})
+        res.status(200).json({ message: "the note is replaced successfully" })
     } else {
-        res.status(404).json ({message: 'id dsn exists'})
+        res.status(404).json({ message: 'id dsnt exists' })
+    }
+})
+
+//PATCH , replace the particular note 
+app.patch('/api/notes/:id', (req, res) => {
+    //find the id from params
+    const id = req.params.id
+    //get the note to be replaced from the user request
+    const noteToReplace = req.body
+    //find the obj matching the id
+    const note = notes.find(note => note.id == id)
+
+    notes = notes.map(note => note.id == id ? { ...note, ...noteToReplace } : note)
+
+    if (note) {
+        res.status(200).json({ message: "the note is patched successfully" })
+    } else {
+        res.status(404).json({ message: 'id dsnt exists' })
     }
 })
 
