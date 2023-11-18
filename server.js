@@ -67,6 +67,19 @@ app.post('/api/notes' ,(req,res)=> {
     res.status(201).json({message: 'notes created successfully'})
 })
 
+//DELETE a note
+app.delete('/api/notes/:id', (req,res)=> {
+    //get the id content which is to be deleted
+    const id = req.params.id
+    //find the note matching the id
+    const note=  notes.find(note=>note.id==id)
+    notes= notes.filter(notes=> notes.id !=id)
+    if(note) {
+        res.status(200).json({message:'note deletes successfully'})
+    } else {
+        res.status(404).json({message: 'id dsnt exist'})
+    }
+})
 
 const HOST = '127.0.0.1'
 const PORT = 3000
