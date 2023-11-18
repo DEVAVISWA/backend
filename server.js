@@ -1,3 +1,4 @@
+//CRUD 
 const express = require('express')
 const app = express()
 
@@ -124,3 +125,4 @@ const PORT = 3000
 app.listen(PORT, HOST, () => {
     console.log(`the server is running at http://${HOST}:${PORT}`)
 })
+
