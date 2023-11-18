@@ -48,36 +48,54 @@ app.get('/api/notes', (req, res) => {
 })
 
 //GET a single note
-app.get('/api/notes/:id' , (req,res)=> {
-    const id = req.params.id    
-    const note = notes.find(note=> note.id==id)
-    if (note){
+app.get('/api/notes/:id', (req, res) => {
+    const id = req.params.id
+    const note = notes.find(note => note.id == id)
+    if (note) {
         res.status(200).json(note)
     } else {
-        res.status(404).json({message:'the id dosent exist'})
+        res.status(404).json({ message: 'the id dosent exist' })
     }
 })
 
 //POST a note
-app.post('/api/notes' ,(req,res)=> {
+app.post('/api/notes', (req, res) => {
     // console.log(req.body) // will be undefined (so we use middleware) 
     //after middleware { id: 7, content: 'yzab', important: false }
     //now concat the req.body to notes array
     notes = notes.concat(req.body) //replace notes with notes 
-    res.status(201).json({message: 'notes created successfully'})
+    res.status(201).json({ message: 'notes created successfully' })
 })
 
 //DELETE a note
-app.delete('/api/notes/:id', (req,res)=> {
+app.delete('/api/notes/:id', (req, res) => {
     //get the id content which is to be deleted
     const id = req.params.id
     //find the note matching the id
-    const note=  notes.find(note=>note.id==id)
-    notes= notes.filter(notes=> notes.id !=id)
-    if(note) {
-        res.status(200).json({message:'note deletes successfully'})
+    const note = notes.find(note => note.id == id)
+    notes = notes.filter(notes => notes.id != id)
+    if (note) {
+        res.status(200).json({ message: 'note deletes successfully' })
     } else {
-        res.status(404).json({message: 'id dsnt exist'})
+        res.status(404).json({ message: 'id dsnt exist' })
+    }
+})
+
+//PUT , replace the entire note 
+app.put('/api/notes/:id', (req, res) => {
+    //find the id from params
+    const id = req.params.id
+    //get the note to be replaced from the user request
+    const noteToReplace= req.body
+    //find the obj matching the id
+    const note = notes.find(note=> note.id==id)
+
+    notes= notes.map(note=> note.id==id ? noteToReplace : note)
+
+    if (note) {
+        res.status(200).json({message : "the note is replaced successfully"})
+    } else {
+        res.status(404).json ({message: 'id dsn exists'})
     }
 })
 
