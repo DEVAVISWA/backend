@@ -1,4 +1,8 @@
 const express = require('express')
+const app = express()
+
+//json parser middleware (to convert req body obj to json)
+app.use(express.json())
 
 let notes = [
     {
@@ -34,12 +38,9 @@ let notes = [
 
 ]
 
-const app = express()
-
 app.get('/', (req, res) => {
     res.send('<h1>Notes application</h1>')
 })
-
 
 //GET all notes
 app.get('/api/notes', (req, res) => {
@@ -55,6 +56,15 @@ app.get('/api/notes/:id' , (req,res)=> {
     } else {
         res.status(404).json({message:'the id dosent exist'})
     }
+})
+
+//POST a note
+app.post('/api/notes' ,(req,res)=> {
+    // console.log(req.body) // will be undefined (so we use middleware) 
+    //after middleware { id: 7, content: 'yzab', important: false }
+    //now concat the req.body to notes array
+    notes = notes.concat(req.body) //replace notes with notes 
+    res.status(201).json({message: 'notes created successfully'})
 })
 
 
