@@ -21,7 +21,23 @@ app.get('/', (req, res) => {
     res.send('<h1>Notes application</h1>')
 })
 
+//(5) Define a schema
+const noteSchema = new mongoose.Schema({
+    id: Number,
+    content : String,
+    important: Boolean
+})
 
+//(4)create or define a model to access datas from DB and see it in endpoints in postman
+const Note= mongoose.model('Note',noteSchema,'notes')
+
+//(6) endpoints fo view all note
+app.get('/api/notes', (req,res)=> {   
+    Note.find({},{})
+        .then(notes=> {
+            res.status(200).json(notes)
+        })
+})
 
 const HOST = '127.0.0.1'
 const PORT = 3000
