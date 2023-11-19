@@ -119,10 +119,9 @@ app.patch('/api/notes/:id', (req, res) => {
 })
 
 const HOST = '127.0.0.1'
-const PORT = 3000
+const PORT = 4000
 
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
     console.log(`the server is running at http://${HOST}:${PORT}`)
 })
-
