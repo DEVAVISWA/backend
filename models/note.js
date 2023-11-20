@@ -6,4 +6,6 @@ const noteSchema = new mongoose.Schema({
     important: Boolean
 })
 
-module.exports= mongoose.model('Note',noteSchema,'notes')
+const Note= mongoose.model('Note',noteSchema,'notes')
+
+module.exports= Note
