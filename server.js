@@ -3,9 +3,12 @@ const app = express()
 const mongoose= require('mongoose')
 const config= require('./utils/config') 
 const {log,err} = require('./utils/logger')
-const cors = require('cors') //(1)import cors
+const cors = require('cors')
+const notesRouter= require('./controllers/notes')
 
-app.use(cors())  //(2) use cors
+mongoose.set('strictQuery', false)
+
+app.use(cors()) 
 app.use(express.json())
 
 log('connecting to', config.MONGODB_URI)
@@ -17,20 +20,10 @@ mongoose.connect(config.MONGODB_URI)
         err(error)
     })
 
-const noteSchema = new mongoose.Schema({
-    id: Number,
-    content : String,
-    important: Boolean
-})
-const Note= mongoose.model('Note',noteSchema,'notes')
 
-app.get('/api/notes', (req,res)=> {   
-    Note.find({},{})
-        .then(notes=> {
-            res.status(200).json(notes)
-        })
-})
+app.use('/api/notes',notesRouter) //using router
 
-app.listen(config.PORT,  () => { 
-    log(`the server is running on port http://127.0.0.1:${config.PORT}`)
-})
+
+
+module.exports = app;
+
