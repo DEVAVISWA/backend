@@ -10,6 +10,15 @@ notesRouter.get('/', (req,res)=> {
         })
 })
 
+//end point to POST a  new data 
+notesRouter.post('/', (req,res)=> {
+    const note= new Note(req.body)
+    note.save()
+        .then(()=> {
+            res.status(201).json({message:'note created successfully'})
+        })
+})
+
 
 
 module.exports= notesRouter;
