@@ -19,6 +19,18 @@ notesRouter.post('/', (req,res)=> {
         })
 })
 
-
+//end point to GET a single note based on id
+notesRouter.get('/:id' , (req,res)=> {
+    //get the id from params
+    const id=req.params.id
+    //use mongoose method
+    Note.findById(id)
+        .then(note => {            
+            res.status(200).json(note)            
+        })
+        .catch (err => {
+            res.status(404).json({message: 'id dsnt exist'})
+        })
+})
 
 module.exports= notesRouter;
