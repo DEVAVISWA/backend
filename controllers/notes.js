@@ -49,5 +49,41 @@ notesRouter.delete('/:id', (req, res) => {
         })
 })
 
+// end point to PUT replace the entire note identified by id
+notesRouter.put('/:id', (req, res) => {
+    const id = req.params.id
+    //note to be replced will be in req.body (see postman)
+    const noteToReplace = req.body
+    Note.findByIdAndUpdate(id, noteToReplace)
+        .then(updatedNote => {
+            if (updatedNote) {
+                res.status(200).json({ message: 'note replaced successfully' })
+            } else {
+                response.status(404).json({ message: 'id does not exists' });
+            }
+        })
+        .catch(err => {
+            response.status(404).json({ message: 'replacing the note failed...' });
+        })
+})
+
+
+//end point ot PATCH a particular value in note identified by id
+notesRouter.patch('/:id', (req, res) => {
+    const id = req.params.id
+    //note to be replced will be in req.body (see postman)
+    const noteToPatch = req.body
+    Note.findByIdAndUpdate(id, noteToPatch)
+        .then(patchedNote => {
+            if (patchedNote) {
+                res.status(200).json({ message: 'note patched successfully' })
+            } else {
+                response.status(404).json({ message: 'id does not exists' });
+            }
+        })
+        .catch(err => {
+            response.status(404).json({ message: 'patching the note failed...' });
+        })
+})
 
 module.exports = notesRouter;
