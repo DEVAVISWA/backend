@@ -1,11 +1,15 @@
 const express = require('express')
 const app = express()
 const mongoose= require('mongoose')
-const config= require('./utils/config') //(4)import from config.js or destructure and take it
-const {log,err} = require('./utils/logger') //destructure and take it 
+const config= require('./utils/config') 
+const {log,err} = require('./utils/logger')
+const cors = require('cors') //(1)import cors
 
+app.use(cors())  //(2) use cors
 app.use(express.json())
-mongoose.connect(config.MONGODB_URI) // (5)use config.MONGODB_URI
+
+log('connecting to', config.MONGODB_URI)
+mongoose.connect(config.MONGODB_URI) 
     .then (()=> {
         log('successfuly connected to mongoDB')
     })
@@ -13,16 +17,11 @@ mongoose.connect(config.MONGODB_URI) // (5)use config.MONGODB_URI
         err(error)
     })
 
-app.get('/', (req, res) => {
-    res.send('<h1>Notes application</h1>')
-})
-
 const noteSchema = new mongoose.Schema({
     id: Number,
     content : String,
     important: Boolean
 })
-
 const Note= mongoose.model('Note',noteSchema,'notes')
 
 app.get('/api/notes', (req,res)=> {   
@@ -32,6 +31,6 @@ app.get('/api/notes', (req,res)=> {
         })
 })
 
-app.listen(config.PORT,  () => { //(use config.PORT)
+app.listen(config.PORT,  () => { 
     log(`the server is running on port http://127.0.0.1:${config.PORT}`)
 })
