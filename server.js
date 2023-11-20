@@ -1,15 +1,16 @@
 const express = require('express')
 const app = express()
 const mongoose= require('mongoose')
-const config= require('./utils/config') //(4)import from config.js
+const config= require('./utils/config') //(4)import from config.js or destructure and take it
+const {log,err} = require('./utils/logger') //destructure and take it 
 
 app.use(express.json())
 mongoose.connect(config.MONGODB_URI) // (5)use config.MONGODB_URI
     .then (()=> {
-        console.log('successfuly connected to mongoDB')
+        log('successfuly connected to mongoDB')
     })
     .catch((error)=> {
-        console.error(error)
+        err(error)
     })
 
 app.get('/', (req, res) => {
@@ -32,5 +33,5 @@ app.get('/api/notes', (req,res)=> {
 })
 
 app.listen(config.PORT,  () => { //(use config.PORT)
-    console.log(`the server is running on port http://127.0.0.1:${config.PORT}`)
+    log(`the server is running on port http://127.0.0.1:${config.PORT}`)
 })
