@@ -5,6 +5,7 @@ const config= require('./utils/config')
 const {log,err} = require('./utils/logger')
 const cors = require('cors')
 const notesRouter= require('./controllers/notes')
+const userRouter = require('./controllers/users')
 
 mongoose.set('strictQuery', false)
 
@@ -21,7 +22,8 @@ mongoose.connect(config.MONGODB_URI)
     })
 
 
-app.use('/api/notes',notesRouter) //using router
+app.use('/api/notes',notesRouter)
+app.use('/api/users' ,userRouter)
 
 
 
