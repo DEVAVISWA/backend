@@ -1,7 +1,12 @@
-(1) create a new Schema in models.js 
-(2) create a new model called User
+first create a collection called users in DB with the help of MongoDB Compass
+add datas to the colllection users
+
+(1) create a new model called user.js in models
+(2) create a new Schema in user.js
 
 (3)in server.js define a new route called userRouter
 
 (4)define end points for it in controllers in a file called users.js
 (5)export it 
+
+now you can Get Post Put Patch Delete the datas from backendserver using vairous postman
