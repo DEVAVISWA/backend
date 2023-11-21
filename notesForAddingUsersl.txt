@@ -1,0 +1,7 @@
+(1) create a new Schema in models.js 
+(2) create a new model called User
+
+(3)in server.js define a new route called userRouter
+
+(4)define end points for it in controllers in a file called users.js
+(5)export it 

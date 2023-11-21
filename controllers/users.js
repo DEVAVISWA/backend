@@ -1,6 +1,6 @@
 const User = require('../models/user')
 
-const userRouter = require('express').Router()
+const userRouter = require('express').Router() //4
 
 userRouter.get('/', (req,res)=> {
     User.find({},{})
@@ -77,4 +77,4 @@ userRouter.patch('/:id', (req, res) => {
 })
 
 
-module.exports= userRouter
+module.exports= userRouter //5

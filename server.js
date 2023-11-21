@@ -23,7 +23,7 @@ mongoose.connect(config.MONGODB_URI)
 
 
 app.use('/api/notes',notesRouter)
-app.use('/api/users' ,userRouter)
+app.use('/api/users' ,userRouter) //3
 
 
 
